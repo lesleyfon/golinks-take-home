@@ -7,7 +7,7 @@ import Axios from "axios";
  */
 export async function fetchOrganizationRepos(orgName) {
 	try {
-		const response = await Axios(`https://api.github.com/orgs/${orgName}/repos`);
+		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`);
 
 		return sortData(response.data);
 	} catch (error) {
@@ -20,7 +20,7 @@ export async function fetchOrganizationRepos(orgName) {
  * @param {*} dateString String from response to parse ot ISO strig
  * @returns String representation of the date mm/dd/yyyy
  */
-function parseDate(dateString) {
+export function parseDate(dateString) {
 	const event = new Date(dateString);
 	return `${event.getMonth()}/${event.getDate()}/${event.getFullYear()}`;
 }
@@ -51,6 +51,7 @@ async function sortData(data) {
 	// Resolve the promise from fetching all languages
 	data = await Promise.all(
 		data.map(async (repoInfo) => {
+			// Look for ways to Optimize this call.
 			let all_languages = await fetchLanguages(repoInfo.languages_url);
 			all_languages = all_languages.data;
 			return {
@@ -69,4 +70,36 @@ async function sortData(data) {
 	);
 
 	return data;
+}
+
+/**
+ *
+ * @param {*} repoUrl api for fetching a single repo information
+ *
+ */
+export async function fetchSingleRepoData(repoUrl) {
+	try {
+		let { data } = await Axios.get("https://api.github.com/repos/Netflix/eureka");
+		let commitUrl = data.commits_url.split("{")[0];
+
+		let commitData = await fetchCommitData(commitUrl);
+
+		return {
+			repo_name: data.name,
+			description: data.description || "",
+			star_count: data.stargazers_count,
+			commit_data: commitData,
+		};
+	} catch (error) {
+		return error;
+	}
+}
+
+async function fetchCommitData(commitUrl) {
+	try {
+		const { data } = await Axios.get(commitUrl);
+		return data;
+	} catch (error) {
+		return error;
+	}
 }
