@@ -16,27 +16,51 @@ export async function fetchOrganizationRepos(orgName) {
 
 /**
  *
- * @param {*} datestring String from response to parse ot ISO strig
+ * @param {*} dateString String from response to parse ot ISO strig
+ * @returns String representation of the date mm/dd/yyyy
  */
-function parseDate(datestring) {
-	const event = new Date(datestring);
+function parseDate(dateString) {
+	const event = new Date(dateString);
 	return `${event.getMonth()}/${event.getDate()}/${event.getFullYear()}`;
 }
 
-// Try returning just the data you need fom here
-function sortData(data) {
+async function fetchLanguages(languageUrl) {
+	try {
+		const response = await Axios(`${languageUrl}`);
+		return response;
+	} catch (error) {
+		return error;
+	}
+}
+
+/**
+ *
+ * @param {*} data list of github organization repositories
+ * @returns List of sorted repositories based on the star count
+ */
+async function sortData(data) {
 	data = data.sort((a, b) => b.stargazers_count - a.stargazers_count);
 
 	// Return relevant data
-	data = data.map((repoInfo) => ({
-		id: repoInfo.id,
-		name: repoInfo.name,
-		language: repoInfo.language,
-		description: repoInfo.description,
-		star_count: repoInfo.stargazers_count,
-		fork_count: repoInfo.forks_count,
-		created_at: parseDate(repoInfo.created_at),
-		updated_at: parseDate(repoInfo.updated_at),
-	}));
+	// Resolve the promise from fetching all languages
+	data = await Promise.all(
+		data.map(async (repoInfo) => {
+			let all_languages = await fetchLanguages(repoInfo.languages_url);
+			all_languages = all_languages.data;
+			return {
+				id: repoInfo.id,
+				name: repoInfo.name,
+				language: repoInfo.language,
+				all_languages,
+				description: repoInfo.description,
+				star_count: repoInfo.stargazers_count,
+				fork_count: repoInfo.forks_count,
+				created_at: parseDate(repoInfo.created_at),
+				repo_url: repoInfo.url,
+				updated_at: parseDate(repoInfo.updated_at),
+			};
+		})
+	);
+	console.log(data);
 	return data;
 }
