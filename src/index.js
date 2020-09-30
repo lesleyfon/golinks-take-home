@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+// React router for routing
+import { BrowserRouter as Router } from "react-router-dom";
+
 import App from "./App";
 
 import * as serviceWorker from "./serviceWorker";
@@ -12,7 +15,10 @@ import "./normalize.css";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		{/* Wrap the whole application with the Router components to enable routing */}
+		<Router>
+			<App />
+		</Router>
 	</React.StrictMode>,
 	document.getElementById("root")
 );
