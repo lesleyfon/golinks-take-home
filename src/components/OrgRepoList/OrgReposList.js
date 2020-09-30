@@ -34,7 +34,7 @@ function OrgReposList() {
 		return (
 			<>
 				{repo.map((repoInfo) => (
-					<OrgRepoCard repoInfo={repoInfo} />
+					<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
 				))}
 			</>
 		);

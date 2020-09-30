@@ -67,6 +67,6 @@ async function sortData(data) {
 			};
 		})
 	);
-	console.log(data);
+
 	return data;
 }

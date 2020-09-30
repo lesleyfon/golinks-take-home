@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
+// Context
+import AppContext from "./../../context/AppContext.js";
+
 function OrgRepoCard({ repoInfo }) {
+	const { updateRepoUrl } = useContext(AppContext);
+
 	return (
-		<ul key={repoInfo.id}>
+		<ul>
 			<Card
 				style={{
 					textAlign: "left",
@@ -23,7 +28,12 @@ function OrgRepoCard({ repoInfo }) {
 			>
 				<li>
 					<h3>
-						<Link to={`/repo/${repoInfo.name}`}>{repoInfo.name}</Link>
+						<Link
+							to={`/repo/${repoInfo.name}`}
+							onClick={() => updateRepoUrl(repoInfo.repo_url)}
+						>
+							{repoInfo.name}
+						</Link>
 					</h3>
 				</li>
 

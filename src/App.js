@@ -1,5 +1,5 @@
 import { Switch, Route } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 // Importing App Context
 import { Provider } from "./context/AppContext";
@@ -11,16 +11,26 @@ import Repository from "./pages/Repository.js";
 // Styles
 import "./App.css";
 
+// App Component
 function App() {
+	// Local State
+	const [repo_ulr, setRepoUrl] = useState("");
+
+	const updateRepoUrl = (data) => {
+		setRepoUrl(data);
+	};
+
 	let store = {
 		orgName: "Netflix",
-		orgRepo: [],
+		repository_url: repo_ulr,
 		isLoading: false,
 		error: {
 			message: "",
 			errorState: false,
 		},
+		updateRepoUrl,
 	};
+
 	return (
 		<main className="App">
 			<Provider value={store}>
