@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
 function OrgRepoCard({ repoInfo }) {
@@ -21,7 +22,9 @@ function OrgRepoCard({ repoInfo }) {
 				}}
 			>
 				<li>
-					<h3>{repoInfo.name}</h3>
+					<h3>
+						<Link to={`/repo/${repoInfo.name}`}>{repoInfo.name}</Link>
+					</h3>
 				</li>
 
 				<li>

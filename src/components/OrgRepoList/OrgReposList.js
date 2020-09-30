@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Card } from "react-bootstrap";
 
 // Context
 import AppContext from "../../context/AppContext.js";
@@ -14,6 +13,8 @@ import OrgRepoCard from "./OrgRepoCard.js";
 function OrgReposList() {
 	const { orgName } = useContext(AppContext);
 	const [repo, setRepo] = useState([]);
+
+	// UseEffect for fetching data
 	useEffect(() => {
 		(async () => {
 			try {
