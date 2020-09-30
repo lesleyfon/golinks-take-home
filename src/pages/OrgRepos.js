@@ -1,6 +1,6 @@
 import React from "react";
 
-import OrgReposList from "./../components/OrgReposList.js";
+import OrgReposList from "./../components/OrgRepoList/OrgReposList.js";
 /**
  * Page for displaying organization's repositories
  */
