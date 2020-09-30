@@ -3,6 +3,7 @@ import Axios from "axios";
 /**
  *
  * @param {*} orgName Name of organisation to Fetch
+ * @returns An ordered List of all repositories in an organization
  */
 export async function fetchOrganizationRepos(orgName) {
 	try {
@@ -24,6 +25,11 @@ function parseDate(dateString) {
 	return `${event.getMonth()}/${event.getDate()}/${event.getFullYear()}`;
 }
 
+/**
+ *
+ * @param {*} languageUrl api endpoint for fetching all languages used in a repository
+ * @returns An object of all the languages used in the repo
+ */
 async function fetchLanguages(languageUrl) {
 	try {
 		const response = await Axios(`${languageUrl}`);
