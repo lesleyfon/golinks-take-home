@@ -1,5 +1,8 @@
-import React from "react";
 import { Switch, Route } from "react-router-dom";
+import React from "react";
+
+// Importing App Context
+import { Provider } from "./context/AppContext";
 
 // Pages
 import OrgRepos from "./pages/OrgRepos.js";
@@ -9,12 +12,31 @@ import Repository from "./pages/Repository.js";
 import "./App.css";
 
 function App() {
+	let store = {
+		orgName: "Netflix",
+		orgRepo: [],
+		isLoading: false,
+		error: {
+			message: "",
+			errorState: false,
+		},
+	};
 	return (
 		<main className="App">
-			<Switch>
-				<Route path="/" exact component={() => <OrgRepos />} />
-				<Route path="/repo/:reponame" exact component={() => <Repository />} />
-			</Switch>
+			<Provider value={store}>
+				<Switch>
+					<Route
+						path="/"
+						exact
+						component={(routeProps) => <OrgRepos {...routeProps} />}
+					/>
+					<Route
+						path="/repo/:reponame"
+						exact
+						component={(routeProps) => <Repository {...routeProps} />}
+					/>
+				</Switch>
+			</Provider>
 		</main>
 	);
 }
