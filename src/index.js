@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+
 import App from "./App";
+
 import * as serviceWorker from "./serviceWorker";
+
+// Styles
+import "bootstrap/dist/css/bootstrap.min.css"; // Required by react-bootstrap to be to able to bootstrap styles
+import "./index.css";
 import "./normalize.css";
 
 ReactDOM.render(
