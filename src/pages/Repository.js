@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { REPO_URL_STORAGE_KEY } from "../utils/CONSTANTS.js";
 import AppContext from "./../context/AppContext.js";
 
 import { fetchSingleRepoData, parseDate } from "./../utils/utilityFunctions";
@@ -10,13 +11,13 @@ function Repository() {
 	const { repository_url } = useContext(AppContext);
 	const [repoData, setRepoData] = useState({});
 	useEffect(() => {
-		if (repository_url) {
-			(async () => {
-				let data = await fetchSingleRepoData(repository_url);
+		(async () => {
+			let data = await fetchSingleRepoData(
+				repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY)
+			);
 
-				setRepoData(data);
-			})();
-		}
+			setRepoData(data);
+		})();
 	}, [repository_url]);
 
 	return (

@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 
 // Context
 import AppContext from "./../../context/AppContext.js";
+import { REPO_URL_STORAGE_KEY } from "../../utils/CONSTANTS.js";
 
 function OrgRepoCard({ repoInfo }) {
 	const { updateRepoUrl } = useContext(AppContext);
@@ -30,7 +31,12 @@ function OrgRepoCard({ repoInfo }) {
 					<h3>
 						<Link
 							to={`/repo/${repoInfo.name}`}
-							onClick={() => updateRepoUrl(repoInfo.repo_url)}
+							onClick={() => {
+								// Update context store repository_url
+								updateRepoUrl(repoInfo.repo_url);
+								// Incase user refreshes a page we want to be able to persist the repo_url_endpoint
+								localStorage.setItem(REPO_URL_STORAGE_KEY, repoInfo.repo_url);
+							}}
 						>
 							{repoInfo.name}
 						</Link>
