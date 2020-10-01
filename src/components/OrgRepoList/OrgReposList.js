@@ -22,15 +22,13 @@ function OrgReposList() {
 				setRepo(() => {
 					return data;
 				});
-			} catch (error) {
-				console.log(error);
+			} catch (err) {
+				console.log(err);
 			}
 		})();
 	}, [orgName]);
 
-	if (repo.length === 0) {
-		return <h1>No Repositories in this Organization</h1>;
-	} else {
+	if (repo.length > 0) {
 		return (
 			<>
 				{repo.map((repoInfo) => (
@@ -38,6 +36,8 @@ function OrgReposList() {
 				))}
 			</>
 		);
+	} else {
+		return <h1>No Repositories in this Organization</h1>;
 	}
 }
 

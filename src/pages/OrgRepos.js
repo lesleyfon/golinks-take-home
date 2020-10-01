@@ -8,9 +8,9 @@ function OrgRepos() {
 	// Accessing the context Store
 
 	return (
-		<section>
+		<section className="row">
 			{" "}
-			To display List of All repos
+			{/* To display List of All repos */}
 			<OrgReposList />
 		</section>
 	);

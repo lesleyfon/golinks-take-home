@@ -2,3 +2,46 @@ ul {
 	list-style-type: none;
 	padding: 0;
 }
+
+ul .card {
+	padding: 15px;
+	text-align: left;
+	padding-left: 10px;
+	margin: 10px 10px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: 0.25rem;
+}
+ul div li h3 {
+	font-size: 1.4rem;
+}
+
+ul div li h3 a {
+	margin-left: 7px;
+	color: black;
+}
+ul .bottom-row {
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+	flex-wrap: wrap;
+	padding: 10px 0px 10px 0px;
+}
+
+.bottom-row li {
+	margin-right: 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 0.9rem;
+}
+
+.bottom-row li span {
+	margin-left: 3px;
+}

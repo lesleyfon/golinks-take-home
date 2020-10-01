@@ -5,13 +5,15 @@ import Axios from "axios";
  * @param {*} orgName Name of organisation to Fetch
  * @returns An ordered List of all repositories in an organization
  */
+
 export async function fetchOrganizationRepos(orgName) {
 	try {
 		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`);
-
+		console.log(response);
 		return sortData(response.data);
 	} catch (error) {
-		return error;
+		console.log("Hereee", error.message);
+		throw new Error(error);
 	}
 }
 
@@ -32,7 +34,12 @@ export function parseDate(dateString) {
  */
 async function fetchLanguages(languageUrl) {
 	try {
-		const response = await Axios(`${languageUrl}`);
+		const response = await Axios.get(`${languageUrl}`, {
+			auth: {
+				Username: "lesleyfon",
+				Password: "619419Val@",
+			},
+		});
 		return response;
 	} catch (error) {
 		return error;
@@ -52,13 +59,13 @@ async function sortData(data) {
 	data = await Promise.all(
 		data.map(async (repoInfo) => {
 			// Look for ways to Optimize this call.
-			let all_languages = await fetchLanguages(repoInfo.languages_url);
-			all_languages = all_languages.data;
+			// let all_languages = await fetchLanguages(repoInfo.languages_url);
+			// all_languages = all_languages.data;
 			return {
 				id: repoInfo.id,
 				name: repoInfo.name,
 				language: repoInfo.language,
-				all_languages,
+				// all_languages,
 				description: repoInfo.description,
 				star_count: repoInfo.stargazers_count,
 				fork_count: repoInfo.forks_count,
@@ -79,7 +86,12 @@ async function sortData(data) {
  */
 export async function fetchSingleRepoData(repoUrl) {
 	try {
-		let { data } = await Axios.get(repoUrl);
+		let { data } = await Axios.get(repoUrl, {
+			auth: {
+				Username: "lesleyfon",
+				Password: "619419Val@",
+			},
+		});
 		let commitUrl = data.commits_url.split("{")[0];
 
 		let commitData = await fetchCommitData(commitUrl);
@@ -97,7 +109,12 @@ export async function fetchSingleRepoData(repoUrl) {
 
 async function fetchCommitData(commitUrl) {
 	try {
-		const { data } = await Axios.get(commitUrl);
+		const { data } = await Axios.get(commitUrl, {
+			auth: {
+				Username: "lesleyfon",
+				Password: "619419Val@",
+			},
+		});
 		return data;
 	} catch (error) {
 		return error;

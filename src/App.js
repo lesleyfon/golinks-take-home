@@ -15,24 +15,31 @@ import "./App.css";
 function App() {
 	// Local State
 	const [repo_ulr, setRepoUrl] = useState("");
+	const [error, setError] = useState({
+		message: "",
+		errorState: false,
+	});
 
 	const updateRepoUrl = (data) => {
 		setRepoUrl(data);
+	};
+
+	const updateErrorState = (err) => {
+		console.log(err);
+		setError({ ...err });
 	};
 
 	let store = {
 		orgName: "Netflix",
 		repository_url: repo_ulr,
 		isLoading: false,
-		error: {
-			message: "",
-			errorState: false,
-		},
+		error: error,
 		updateRepoUrl,
+		updateErrorState,
 	};
 
 	return (
-		<main className="App">
+		<main className="App container">
 			<Provider value={store}>
 				<Switch>
 					<Route
