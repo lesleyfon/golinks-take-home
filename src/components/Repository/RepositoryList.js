@@ -7,6 +7,8 @@ import { fetchSingleRepoData } from "./../../utils/utilityFunctions.js";
 import AppContext from "./../../context/AppContext.js";
 import RepositoryCard from "./RepositoryCard.js";
 
+// Styles
+import "./RepositoryStyles.css";
 /**
  * Display a single repository with info about that repository
  */
@@ -24,7 +26,7 @@ function RepositoryList() {
 	}, [repository_url]);
 
 	return (
-		<section>
+		<section className="container">
 			{repoData.repo_name ? (
 				<>
 					<RepositoryCard repoData={repoData} />

@@ -1,0 +1,29 @@
+.repository-card-header {
+	padding: 15px;
+	text-align: left;
+	margin-top: 3rem;
+}
+
+.repository-card-header h3 {
+	font-size: 1.8rem;
+	font-weight: 700;
+}
+
+.repository-card-header hr {
+	height: 0;
+	margin: 15px 0;
+	overflow: hidden;
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid #dfe2e5;
+}
+
+.bottom-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.bottom-row p {
+	margin-right: 25px;
+}

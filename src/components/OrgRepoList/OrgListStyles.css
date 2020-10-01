@@ -6,7 +6,7 @@ ul {
 ul .card {
 	padding: 15px;
 	text-align: left;
-	padding-left: 10px;
+	/* padding-left: 10px; */
 	margin: 10px 10px;
 	position: relative;
 	display: flex;
