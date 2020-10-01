@@ -7,7 +7,7 @@ import AppContext from "./../../context/AppContext";
 import { GoHome } from "react-icons/go";
 
 function Search() {
-	const { updateRepoUrl } = useContext(AppContext);
+	const { updateOrganizationName } = useContext(AppContext);
 
 	const [orgName, setOrgName] = useState("Netflix");
 
@@ -16,7 +16,7 @@ function Search() {
 			onSubmit={(e) => {
 				e.preventDefault();
 
-				updateRepoUrl(orgName);
+				updateOrganizationName(orgName);
 			}}
 		>
 			<Link to="/">
