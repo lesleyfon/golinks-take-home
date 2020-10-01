@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import BottomSection from "./BottomSection.js";
 import { Link } from "react-router-dom";
@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { BiBook } from "react-icons/all";
 
 import { REPO_URL_STORAGE_KEY } from "../../utils/CONSTANTS.js";
+import AppContext from "../../context/AppContext.js";
 
-function OrgRepoCard({ repoInfo, repository_url }) {
+function OrgRepoCard({ repoInfo }) {
+	const { updateRepositoryUrl } = useContext(AppContext);
+
 	return (
 		<div className="col-sm-12 repo-info">
 			<div className="card">
@@ -23,7 +26,7 @@ function OrgRepoCard({ repoInfo, repository_url }) {
 								end_point = `${end_point[end_point.length - 2]}/${
 									end_point[end_point.length - 1]
 								}`;
-
+								updateRepositoryUrl(end_point);
 								// Incase user refreshes a page we want to be able to persist the repo_url_endpoint
 								// Try using an object so that if we leave a page and TRY TO VISIT THE page with a different url, we get a error { url: "", }
 								localStorage.setItem(REPO_URL_STORAGE_KEY, end_point);

@@ -107,10 +107,8 @@ async function sortData(data) {
  */
 export async function fetchSingleRepoData(repoEndpoint) {
 	try {
-		console.log("Fetch Api", repoEndpoint);
 		let { data } = await Axios.get(`https://api.github.com/repos/${repoEndpoint}`);
 
-		//
 		let commitUrl = data.commits_url.split("{")[0];
 		let commitData = await fetchCommitData(commitUrl);
 

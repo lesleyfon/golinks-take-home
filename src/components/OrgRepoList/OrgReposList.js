@@ -13,15 +13,15 @@ import OrgRepoCard from "./OrgRepoCard.js";
 
 function OrgReposList() {
 	// Get the current Organisation name from the context store
-	const { repository_url } = useContext(AppContext);
-
+	const { organization_name } = useContext(AppContext);
+	console.log(organization_name);
 	const [repo, setRepo] = useState([]);
 
 	// UseEffect for fetching data when component mounts
 	useEffect(() => {
 		(async () => {
 			try {
-				let data = await fetchOrganizationRepos(repository_url);
+				let data = await fetchOrganizationRepos(organization_name);
 				setRepo(() => {
 					return data;
 				});
@@ -29,7 +29,7 @@ function OrgReposList() {
 				console.log(err);
 			}
 		})();
-	}, [repository_url]);
+	}, [organization_name]);
 
 	return (
 		<section className="section-container col-lg-8 col-md-12 col-sm-12">

@@ -15,13 +15,14 @@ import RepositoryHeader from "./RepositoryHeader.js";
  * Display a single repository with info about that repository
  */
 function RepositoryList() {
-	const { repository_url } = useContext(AppContext);
+	const { repository_url, updateRepositoryUrl } = useContext(AppContext);
+
 	const [repoData, setRepoData] = useState({});
 	useEffect(() => {
 		(async () => {
-			const repo_endpoint = localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
+			const repo_endpoint = repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
 
-			console.log(repo_endpoint);
+			updateRepositoryUrl(repo_endpoint);
 			let data = await fetchSingleRepoData(repo_endpoint);
 
 			setRepoData(data);
