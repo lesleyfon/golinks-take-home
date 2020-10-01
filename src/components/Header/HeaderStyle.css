@@ -1,13 +1,36 @@
+.org-header {
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+/* Media query to kick in at minn with of 992 */
+@media only screen and (min-width: 992px) {
+	.org-header {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.org-details-container {
+		flex-wrap: wrap;
+		justify-content: left;
+		flex-direction: column;
+	}
+}
+
 .org-details-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	position: fixed;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 .org-details-container .org-avatar {
 	width: 200px;
 	height: 200px;
+	margin-left: 15px;
 }
 
 .org-details-container .org-avatar img {

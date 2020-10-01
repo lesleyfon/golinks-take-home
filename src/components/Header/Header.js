@@ -1,8 +1,16 @@
 import React, { useEffect, useContext, useState } from "react";
+
+// Utility Functions
 import { fetchOrgDetails } from "../../utils/utilityFunctions";
+
+// Context
 import AppContext from "../../context/AppContext.js";
-import "./HeaderStyle.css";
+
+// Icons/SVG's
 import { RiGitRepositoryCommitsLine } from "react-icons/ri";
+import { FaTwitter } from "react-icons/fa";
+
+import "./HeaderStyle.css";
 
 function Header() {
 	const { orgName } = useContext(AppContext);
@@ -20,15 +28,7 @@ function Header() {
 		})();
 	}, [orgName]);
 	return (
-		<header
-			style={{
-				height: "100vh",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-			className="col-lg-4 col-md-12 col-sm-12"
-		>
+		<header className="org-header col-lg-4 col-md-12 col-sm-12">
 			{console.log(orgDetails)}
 			{orgDetails.fetchComplete ? (
 				<div className="org-details-container">
@@ -44,7 +44,13 @@ function Header() {
 							<RiGitRepositoryCommitsLine size={20} />
 							{orgDetails.repo_count}
 						</span>
-						{orgDetails.twitter ? <span>{orgDetails.twitter}</span> : null}
+						<div>
+							{orgDetails.twitter ? (
+								<span>
+									<FaTwitter /> {orgDetails.twitter}
+								</span>
+							) : null}
+						</div>
 					</div>
 				</div>
 			) : (
