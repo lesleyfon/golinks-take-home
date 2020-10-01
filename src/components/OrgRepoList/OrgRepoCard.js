@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
+
 import { BiBook } from "react-icons/all";
 // BiGitRepoForked
 // Context
@@ -12,9 +12,9 @@ function OrgRepoCard({ repoInfo }) {
 	const { updateRepoUrl } = useContext(AppContext);
 
 	return (
-		<ul className="col-sm-12">
-			<Card>
-				<li>
+		<div className="col-sm-12 repo-info">
+			<div className="card">
+				<div className="repo-info-top">
 					<h3>
 						<BiBook />
 						<Link
@@ -30,12 +30,12 @@ function OrgRepoCard({ repoInfo }) {
 							{repoInfo.name}
 						</Link>
 					</h3>
-				</li>
+				</div>
 
-				<li>{repoInfo.description}</li>
+				<p>{repoInfo.description}</p>
 				<BottomSection repoInfo={repoInfo} />
-			</Card>
-		</ul>
+			</div>
+		</div>
 	);
 }
 

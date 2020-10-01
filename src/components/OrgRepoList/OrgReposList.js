@@ -30,18 +30,15 @@ function OrgReposList() {
 		})();
 	}, [orgName]);
 
-	// Conditionally render component
-	if (repo.length > 0) {
-		return (
-			<>
-				{repo.map((repoInfo) => (
-					<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
-				))}
-			</>
-		);
-	} else {
-		return <h1>No Repositories in this Organization</h1>;
-	}
+	return (
+		<section className="section-container">
+			{repo.length > 0 ? (
+				repo.map((repoInfo) => <OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />)
+			) : (
+				<h1>No Repositories in this Organization</h1>
+			)}
+		</section>
+	);
 }
 
 export default OrgReposList;

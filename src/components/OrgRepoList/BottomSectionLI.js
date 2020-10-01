@@ -2,12 +2,12 @@ import React from "react";
 
 function BottomSectionLI({ svg, text_data }) {
 	return (
-		<li>
+		<div>
 			<span>
 				{" "}
 				{svg} {text_data}
 			</span>
-		</li>
+		</div>
 	);
 }
 
