@@ -1,0 +1,30 @@
+.org-details-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: fixed;
+}
+.org-details-container .org-avatar {
+	width: 200px;
+	height: 200px;
+}
+
+.org-details-container .org-avatar img {
+	width: 100%;
+	height: 100%;
+}
+.org-details-container .org-details {
+	text-align: left;
+	padding: 0px 10px;
+}
+
+.org-details-container .org-details p {
+	font-size: 0.85rem;
+	font-weight: 500;
+	margin-bottom: 0px;
+}
+
+.org-details-container .org-details .repo-count {
+	font-size: 0.7rem;
+}

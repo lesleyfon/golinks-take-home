@@ -9,7 +9,26 @@ import Axios from "axios";
 export async function fetchOrganizationRepos(orgName) {
 	try {
 		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`);
+
 		return sortData(response.data);
+	} catch (error) {
+		throw new Error(error);
+	}
+}
+
+export async function fetchOrgDetails(orgName) {
+	try {
+		const response = await Axios.get(`https://api.github.com/orgs/${orgName}`);
+
+		return {
+			avatar_url: response.data.avatar_url,
+			description: response.data.description,
+			location: response.data.location,
+			name: response.data.name,
+			repo_count: response.data.public_repos,
+			twitter: response.data.twitter_username,
+			fetchComplete: true,
+		};
 	} catch (error) {
 		throw new Error(error);
 	}
