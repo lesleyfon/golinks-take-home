@@ -50,14 +50,15 @@
 }
 
 .commit-card .right {
-	text-align: left;
-	height: 100%;
+	min-height: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 	align-items: center;
+	padding: 0px;
 }
 .commit-card .right p {
 	margin: 0px;
+	padding: 5px;
 }
 
 .commit-card-bottom {

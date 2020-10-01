@@ -9,10 +9,8 @@ import Axios from "axios";
 export async function fetchOrganizationRepos(orgName) {
 	try {
 		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`);
-		console.log(response);
 		return sortData(response.data);
 	} catch (error) {
-		console.log("Hereee", error.message);
 		throw new Error(error);
 	}
 }
@@ -31,20 +29,18 @@ export function parseDate(dateString) {
  *
  * @param {*} languageUrl api endpoint for fetching all languages used in a repository
  * @returns An object of all the languages used in the repo
+ async function fetchLanguages(languageUrl) {
+	 try {
+		 const response = await Axios.get(`${languageUrl}`, {
+			 auth: {
+			 },
+		 });
+		 return response;
+	 } catch (error) {
+		 return error;
+	 }
+ }
  */
-async function fetchLanguages(languageUrl) {
-	try {
-		const response = await Axios.get(`${languageUrl}`, {
-			auth: {
-				Username: "lesleyfon",
-				Password: "619419Val@",
-			},
-		});
-		return response;
-	} catch (error) {
-		return error;
-	}
-}
 
 /**
  *
@@ -86,12 +82,7 @@ async function sortData(data) {
  */
 export async function fetchSingleRepoData(repoUrl) {
 	try {
-		let { data } = await Axios.get(repoUrl, {
-			auth: {
-				Username: "lesleyfon",
-				Password: "619419Val@",
-			},
-		});
+		let { data } = await Axios.get(repoUrl);
 		let commitUrl = data.commits_url.split("{")[0];
 
 		let commitData = await fetchCommitData(commitUrl);
@@ -109,12 +100,7 @@ export async function fetchSingleRepoData(repoUrl) {
 
 async function fetchCommitData(commitUrl) {
 	try {
-		const { data } = await Axios.get(commitUrl, {
-			auth: {
-				Username: "lesleyfon",
-				Password: "619419Val@",
-			},
-		});
+		const { data } = await Axios.get(commitUrl);
 		return data;
 	} catch (error) {
 		return error;

@@ -32,7 +32,7 @@ function RepositoryList() {
 			{repoData.repo_name ? (
 				<>
 					<RepositoryHeader repoData={repoData} />
-					<>{console.log(repoData)}</>
+
 					<section className="commit-section">
 						{repoData.commit_data.map((commit_data, i) => {
 							return <RepositoryCard key={i} commit_data={commit_data} />;
