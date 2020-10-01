@@ -17,8 +17,6 @@ function RepositoryList() {
 	const { repository_url } = useContext(AppContext);
 	const [repoData, setRepoData] = useState({});
 	useEffect(() => {
-		//
-
 		(async () => {
 			const repo_endpoint = repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
 			let data = await fetchSingleRepoData(repo_endpoint);

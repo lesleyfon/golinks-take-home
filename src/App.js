@@ -10,11 +10,12 @@ import Repository from "./pages/Repository.js";
 
 // Styles
 import "./App.css";
+import Search from "./components/Search/Search";
 
 // App Component
 function App() {
 	// Local State
-	const [repo_ulr, setRepoUrl] = useState("");
+	const [repo_ulr, setRepoUrl] = useState("Netflix");
 	const [error, setError] = useState({
 		message: "",
 		errorState: false,
@@ -37,10 +38,11 @@ function App() {
 		updateRepoUrl,
 		updateErrorState,
 	};
-
+	console.log(repo_ulr);
 	return (
 		<main className="App">
 			<Provider value={store}>
+				<Search />
 				<Switch>
 					<Route
 						path="/"
