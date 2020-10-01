@@ -22,6 +22,7 @@ function OrgRepoCard({ repoInfo }) {
 								// Update context store repository_url
 								updateRepoUrl(repoInfo.repo_url);
 								// Incase user refreshes a page we want to be able to persist the repo_url_endpoint
+								// Try using an object so that if we leave a page and TRY TO VISIT THE page with a different url, we get a error { url: "", }
 								localStorage.setItem(REPO_URL_STORAGE_KEY, repoInfo.repo_url);
 							}}
 						>

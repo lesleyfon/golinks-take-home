@@ -9,6 +9,7 @@ import RepositoryCard from "./RepositoryCard.js";
 
 // Styles
 import "./RepositoryStyles.css";
+import RepositoryHeader from "./RepositoryHeader.js";
 /**
  * Display a single repository with info about that repository
  */
@@ -16,10 +17,11 @@ function RepositoryList() {
 	const { repository_url } = useContext(AppContext);
 	const [repoData, setRepoData] = useState({});
 	useEffect(() => {
+		//
+
 		(async () => {
-			let data = await fetchSingleRepoData(
-				repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY)
-			);
+			const repo_endpoint = repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
+			let data = await fetchSingleRepoData(repo_endpoint);
 
 			setRepoData(data);
 		})();
@@ -29,10 +31,16 @@ function RepositoryList() {
 		<section className="container">
 			{repoData.repo_name ? (
 				<>
-					<RepositoryCard repoData={repoData} />
+					<RepositoryHeader repoData={repoData} />
+					<>{console.log(repoData)}</>
+					<section className="commit-section">
+						{repoData.commit_data.map((commit_data, i) => {
+							return <RepositoryCard key={i} commit_data={commit_data} />;
+						})}
+					</section>
 				</>
 			) : (
-				<p>console.error();</p>
+				<p>Fetching Data</p>
 			)}
 		</section>
 	);
