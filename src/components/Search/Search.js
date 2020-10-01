@@ -1,5 +1,10 @@
 import React, { useState, useContext } from "react";
+
+import { Link } from "react-router-dom";
 import AppContext from "./../../context/AppContext";
+
+// Icons
+import { GoHome } from "react-icons/go";
 
 function Search() {
 	const { updateRepoUrl } = useContext(AppContext);
@@ -14,7 +19,9 @@ function Search() {
 				updateRepoUrl(orgName);
 			}}
 		>
-			<button></button>
+			<Link to="/">
+				<GoHome />
+			</Link>
 			<input type="text" placeholder={orgName} onChange={(e) => setOrgName(e.target.value)} />
 		</form>
 	);

@@ -16,6 +16,8 @@ import Search from "./components/Search/Search";
 function App() {
 	// Local State
 	const [repo_ulr, setRepoUrl] = useState("Netflix");
+	const [organizationName, setOrganizationName] = useState("Netflix");
+
 	const [error, setError] = useState({
 		message: "",
 		errorState: false,
@@ -25,17 +27,23 @@ function App() {
 		setRepoUrl(data);
 	};
 
+	const updateOrganizationName = (data) => {
+		setOrganizationName(data);
+	};
 	const updateErrorState = (err) => {
 		console.log(err);
 		setError({ ...err });
 	};
 
 	let store = {
+		organization_name: organizationName,
 		repository_url: repo_ulr,
 		isLoading: false,
 		error: error,
 		updateRepoUrl,
 		updateErrorState,
+
+		updateOrganizationName,
 	};
 
 	return (

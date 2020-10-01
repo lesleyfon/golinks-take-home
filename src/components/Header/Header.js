@@ -13,20 +13,20 @@ import { FaTwitter } from "react-icons/fa";
 import "./HeaderStyle.css";
 
 function Header() {
-	const { repository_url } = useContext(AppContext);
+	const { organization_name } = useContext(AppContext);
 
 	const [orgDetails, setOrgDetails] = useState({});
 
 	useEffect(() => {
 		(async () => {
 			try {
-				const data = await fetchOrgDetails(repository_url);
+				const data = await fetchOrgDetails(organization_name);
 				setOrgDetails(data);
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [repository_url]);
+	}, [organization_name]);
 	return (
 		<header className="org-header col-lg-4 col-md-12 col-sm-12">
 			{orgDetails.fetchComplete ? (
