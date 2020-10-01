@@ -10,6 +10,7 @@ import RepositoryCard from "./RepositoryCard.js";
 // Styles
 import "./RepositoryStyles.css";
 import RepositoryHeader from "./RepositoryHeader.js";
+
 /**
  * Display a single repository with info about that repository
  */
@@ -18,7 +19,9 @@ function RepositoryList() {
 	const [repoData, setRepoData] = useState({});
 	useEffect(() => {
 		(async () => {
-			const repo_endpoint = repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
+			const repo_endpoint = localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
+
+			console.log(repo_endpoint);
 			let data = await fetchSingleRepoData(repo_endpoint);
 
 			setRepoData(data);

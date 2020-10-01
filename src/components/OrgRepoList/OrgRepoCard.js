@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+
+import BottomSection from "./BottomSection.js";
 import { Link } from "react-router-dom";
 
 import { BiBook } from "react-icons/all";
-// BiGitRepoForked
-// Context
-import AppContext from "./../../context/AppContext.js";
+
 import { REPO_URL_STORAGE_KEY } from "../../utils/CONSTANTS.js";
-import BottomSection from "./BottomSection.js";
 
-function OrgRepoCard({ repoInfo }) {
-	const { updateRepoUrl } = useContext(AppContext);
-
+function OrgRepoCard({ repoInfo, repository_url }) {
 	return (
 		<div className="col-sm-12 repo-info">
 			<div className="card">
@@ -21,10 +18,15 @@ function OrgRepoCard({ repoInfo }) {
 							to={`/repo/${repoInfo.name}`}
 							onClick={() => {
 								// Update context store repository_url
-								updateRepoUrl(repoInfo.repo_url);
+								let end_point = repoInfo.repo_url.split("/");
+
+								end_point = `${end_point[end_point.length - 2]}/${
+									end_point[end_point.length - 1]
+								}`;
+
 								// Incase user refreshes a page we want to be able to persist the repo_url_endpoint
 								// Try using an object so that if we leave a page and TRY TO VISIT THE page with a different url, we get a error { url: "", }
-								localStorage.setItem(REPO_URL_STORAGE_KEY, repoInfo.repo_url);
+								localStorage.setItem(REPO_URL_STORAGE_KEY, end_point);
 							}}
 						>
 							{repoInfo.name}

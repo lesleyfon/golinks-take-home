@@ -14,6 +14,7 @@ function Search() {
 				updateRepoUrl(orgName);
 			}}
 		>
+			<button></button>
 			<input type="text" placeholder={orgName} onChange={(e) => setOrgName(e.target.value)} />
 		</form>
 	);

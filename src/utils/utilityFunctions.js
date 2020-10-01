@@ -96,14 +96,16 @@ async function sortData(data) {
 
 /**
  *
- * @param {*} repoUrl api for fetching a single repo information
+ * @param {*} repoEndpoint api for fetching a single repo information
  *
  */
-export async function fetchSingleRepoData(repoUrl) {
+export async function fetchSingleRepoData(repoEndpoint) {
 	try {
-		let { data } = await Axios.get(repoUrl);
-		let commitUrl = data.commits_url.split("{")[0];
+		console.log("Fetch Api", repoEndpoint);
+		let { data } = await Axios.get(`https://api.github.com/repos/${repoEndpoint}`);
 
+		//
+		let commitUrl = data.commits_url.split("{")[0];
 		let commitData = await fetchCommitData(commitUrl);
 
 		return {

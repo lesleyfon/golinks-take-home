@@ -31,14 +31,13 @@ function App() {
 	};
 
 	let store = {
-		orgName: "Netflix",
 		repository_url: repo_ulr,
 		isLoading: false,
 		error: error,
 		updateRepoUrl,
 		updateErrorState,
 	};
-	console.log(repo_ulr);
+
 	return (
 		<main className="App">
 			<Provider value={store}>
