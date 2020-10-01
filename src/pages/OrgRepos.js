@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../components/Header/Header.js";
 
 import OrgReposList from "./../components/OrgRepoList/OrgReposList.js";
 /**
@@ -11,6 +12,7 @@ function OrgRepos() {
 		<section className="row">
 			{" "}
 			{/* To display List of All repos */}
+			<Header />
 			<OrgReposList />
 		</section>
 	);

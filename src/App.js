@@ -39,7 +39,7 @@ function App() {
 	};
 
 	return (
-		<main className="App container">
+		<main className="App">
 			<Provider value={store}>
 				<Switch>
 					<Route

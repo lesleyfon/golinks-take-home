@@ -8,6 +8,7 @@ import { fetchOrganizationRepos } from "../../utils/utilityFunctions";
 
 // Styles
 import "./OrgListStyles.css";
+
 import OrgRepoCard from "./OrgRepoCard.js";
 
 function OrgReposList() {
@@ -31,7 +32,7 @@ function OrgReposList() {
 	}, [orgName]);
 
 	return (
-		<section className="section-container">
+		<section className="section-container col-lg-8 col-md-12 col-sm-12">
 			{repo.length > 0 ? (
 				repo.map((repoInfo) => <OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />)
 			) : (
