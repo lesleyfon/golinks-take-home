@@ -26,7 +26,7 @@ ul div li h3 a {
 	margin-left: 7px;
 	color: black;
 }
-ul .bottom-row {
+ul .bottom-section {
 	display: flex;
 	justify-content: flex-start;
 	align-content: center;
@@ -34,7 +34,7 @@ ul .bottom-row {
 	padding: 10px 0px 10px 0px;
 }
 
-.bottom-row li {
+.bottom-section li {
 	margin-right: 25px;
 	display: flex;
 	justify-content: space-between;
@@ -42,6 +42,6 @@ ul .bottom-row {
 	font-size: 0.9rem;
 }
 
-.bottom-row li span {
+.bottom-section li span {
 	margin-left: 3px;
 }

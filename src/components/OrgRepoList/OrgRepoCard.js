@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
-import { BiBook, BiGitRepoForked, FiStar, GoFileCode, MdDateRange } from "react-icons/all";
+import { BiBook } from "react-icons/all";
 // BiGitRepoForked
 // Context
 import AppContext from "./../../context/AppContext.js";
 import { REPO_URL_STORAGE_KEY } from "../../utils/CONSTANTS.js";
+import BottomSection from "./BottomSection.js";
 
 function OrgRepoCard({ repoInfo }) {
 	const { updateRepoUrl } = useContext(AppContext);
@@ -32,25 +33,7 @@ function OrgRepoCard({ repoInfo }) {
 				</li>
 
 				<li>{repoInfo.description}</li>
-				<div className="bottom-row">
-					<li className="language">
-						<span>
-							{" "}
-							<GoFileCode /> {repoInfo.language}
-						</span>
-					</li>
-					<li className="star-count">
-						<FiStar /> <span>{repoInfo.star_count}</span>
-					</li>
-					<li className="fork-count">
-						<BiGitRepoForked />
-						<span>{repoInfo.fork_count}</span>
-					</li>
-					<li className="date">
-						<MdDateRange />
-						<span>{repoInfo.created_at}</span>
-					</li>
-				</div>
+				<BottomSection repoInfo={repoInfo} />
 			</Card>
 		</ul>
 	);

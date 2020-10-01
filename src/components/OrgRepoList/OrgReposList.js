@@ -11,10 +11,12 @@ import "./OrgListStyles.css";
 import OrgRepoCard from "./OrgRepoCard.js";
 
 function OrgReposList() {
+	// Get the current Organisation name from the context store
 	const { orgName } = useContext(AppContext);
+
 	const [repo, setRepo] = useState([]);
 
-	// UseEffect for fetching data
+	// UseEffect for fetching data when component mounts
 	useEffect(() => {
 		(async () => {
 			try {
@@ -28,6 +30,7 @@ function OrgReposList() {
 		})();
 	}, [orgName]);
 
+	// Conditionally render component
 	if (repo.length > 0) {
 		return (
 			<>

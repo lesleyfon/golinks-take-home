@@ -18,13 +18,13 @@
 	border-bottom: 1px solid #dfe2e5;
 }
 
-.bottom-row {
+.bottom-section {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 }
 
-.bottom-row p {
+.bottom-section p {
 	margin-right: 25px;
 }
 

@@ -16,7 +16,7 @@ function RepositoryHeader({ repoData }) {
 			</h3>
 			<p>{repoData.description}</p>
 
-			<div className="bottom-row">
+			<div className="bottom-section">
 				<p>
 					<FiStar /> <span>{repoData.star_count}</span>
 				</p>
