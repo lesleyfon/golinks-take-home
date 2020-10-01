@@ -27,3 +27,58 @@
 .bottom-row p {
 	margin-right: 25px;
 }
+
+.commit-card {
+	min-height: 41px;
+	max-height: 100%;
+	padding: 8px;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #e1e4e8;
+	border-top: 1px solid #e1e4e8;
+	flex-wrap: wrap-reverse;
+}
+
+.commit-card .left {
+	text-align: left;
+	line-height: 16px;
+}
+/* .left h5 { */
+.commit-card .left h5 {
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.commit-card .right {
+	text-align: center;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.commit-card .right p {
+	margin: 0px;
+}
+
+.commit-card-bottom {
+	height: 20px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.commit-card-bottom p {
+	margin: 0 10px 0 0;
+	color: #444d56;
+	font-size: 0.8rem;
+}
+
+.commit-card-bottom .committer-avatar {
+	height: 100%;
+	width: 20px;
+	margin-right: 5px;
+}
+.commit-card-bottom .committer-avatar img {
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+}

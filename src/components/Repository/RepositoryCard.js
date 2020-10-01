@@ -23,17 +23,47 @@ function RepositoryCard({ repoData }) {
 						<GiForklift /> <span>{repoData.star_count}</span>
 					</p>
 				</div>
-				<hr></hr>
+				{/* <hr></hr> */}
 			</div>
-			{repoData.commit_data.map((commit_data, i) => (
-				<div key={i}>
-					{/* <>{console.log(commit_data.commit.message)}</> */}
-					<h5>Title: </h5>
-					<h5>User Name: {commit_data.commit.author.name}</h5>
-					<p>Hash: {commit_data.sha}</p>
-					<p>Date {parseDate(commit_data.commit.author.date)}</p>
-				</div>
-			))}
+
+			<section className="commit-section">
+				{repoData.commit_data.map((commit_data, i) => {
+					const hash = {
+						shortenHash: commit_data.sha.substring(0, 8),
+						fullHash: commit_data.sha,
+					};
+					let url = null;
+
+					if (commit_data.committer) {
+						url = commit_data.committer.avatar_url;
+					}
+
+					return (
+						<div key={i} className="commit-card">
+							<div className="left col-md-9 col-sm-12">
+								<h5>{commit_data.commit.message}</h5>
+								<div className="commit-card-bottom">
+									<div className="committer-avatar">
+										<img
+											src={
+												url ||
+												"https://avatars3.githubusercontent.com/u/19864447?v=4"
+											}
+											alt="commiter avatar"
+										/>
+									</div>
+									<p> by {commit_data.commit.author.name}</p>
+									<p> committed on {parseDate(commit_data.commit.author.date)}</p>
+								</div>
+							</div>
+							{/* <>{console.log(commit_data.commit.message)}</> */}
+							<div className="right col-md-3 col-sm-12">
+								<p>Hash: {hash.shortenHash}</p>
+							</div>
+						</div>
+					);
+				})}
+			</section>
 		</>
 	);
 }
