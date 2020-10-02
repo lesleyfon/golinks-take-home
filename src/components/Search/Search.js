@@ -6,24 +6,33 @@ import AppContext from "./../../context/AppContext";
 // Icons
 import { GoHome } from "react-icons/go";
 
+// Styles
+import "./SearchStyles.css";
+
 function Search() {
 	const { updateOrganizationName } = useContext(AppContext);
 
 	const [orgName, setOrgName] = useState("Netflix");
 
 	return (
-		<form
-			onSubmit={(e) => {
-				e.preventDefault();
+		<section className="search-container">
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
 
-				updateOrganizationName(orgName);
-			}}
-		>
-			<Link to="/">
-				<GoHome />
-			</Link>
-			<input type="text" placeholder={orgName} onChange={(e) => setOrgName(e.target.value)} />
-		</form>
+					updateOrganizationName(orgName);
+				}}
+			>
+				<Link to="/">
+					<GoHome />
+				</Link>
+				<input
+					type="text"
+					placeholder={orgName}
+					onChange={(e) => setOrgName(e.target.value)}
+				/>
+			</form>
+		</section>
 	);
 }
 
