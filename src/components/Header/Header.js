@@ -16,14 +16,25 @@ function Header() {
 	const { organization_name } = useContext(AppContext);
 
 	const [orgDetails, setOrgDetails] = useState({});
-
+	const [err, setErr] = useState({
+		message: "",
+		isErr: false,
+	});
 	useEffect(() => {
 		(async () => {
 			try {
 				const data = await fetchOrgDetails(organization_name);
+
+				setErr({
+					message: "",
+					isErr: false,
+				});
 				setOrgDetails(data);
 			} catch (err) {
-				console.log(err);
+				setErr({
+					message: err.message,
+					isErr: true,
+				});
 			}
 		})();
 	}, [organization_name]);
@@ -53,7 +64,7 @@ function Header() {
 					</div>
 				</div>
 			) : (
-				<h3>Fetching Data For Organisation</h3>
+				<>{err.isErr ? <h3>{""}</h3> : <h3>Fetching Data For Organisation</h3>}</>
 			)}
 		</header>
 	);

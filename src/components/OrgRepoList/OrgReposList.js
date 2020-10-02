@@ -16,7 +16,10 @@ function OrgReposList() {
 	const { organization_name } = useContext(AppContext);
 
 	const [repo, setRepo] = useState([]);
-
+	const [err, setErr] = useState({
+		message: "",
+		isErr: false,
+	});
 	// UseEffect for fetching data when component mounts
 	useEffect(() => {
 		(async () => {
@@ -25,7 +28,15 @@ function OrgReposList() {
 				setRepo(() => {
 					return data;
 				});
+				setErr({
+					message: "",
+					isErr: false,
+				});
 			} catch (err) {
+				setErr({
+					message: err.message,
+					isErr: true,
+				});
 				console.log(err);
 			}
 		})();
@@ -36,7 +47,19 @@ function OrgReposList() {
 			{repo.length > 0 ? (
 				repo.map((repoInfo) => <OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />)
 			) : (
-				<h1>No Repositories in this Organization</h1>
+				<>
+					{err.isErr ? (
+						<h3
+							style={{
+								textAlign: "left",
+							}}
+						>
+							Error: Double Check the organization name if it is spelled right
+						</h3>
+					) : (
+						<h1>No Repositories in this Organization</h1>
+					)}
+				</>
 			)}
 		</section>
 	);
