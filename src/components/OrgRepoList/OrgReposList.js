@@ -32,7 +32,7 @@ function OrgReposList() {
 	}, [organization_name]);
 
 	return (
-		<section className="section-container col-lg-8 col-md-12 col-sm-12">
+		<section className="section-container col-lg-7 col-md-12 col-sm-12">
 			{repo.length > 0 ? (
 				repo.map((repoInfo) => <OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />)
 			) : (

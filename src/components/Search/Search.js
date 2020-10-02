@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AppContext from "./../../context/AppContext";
 
 // Icons
-import { GoHome } from "react-icons/go";
+import { GoHome, GoSearch } from "react-icons/go";
 
 // Styles
 import "./SearchStyles.css";
@@ -14,23 +14,27 @@ function Search() {
 
 	const [orgName, setOrgName] = useState("Netflix");
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		updateOrganizationName(orgName);
+	};
 	return (
 		<section className="search-container">
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-
-					updateOrganizationName(orgName);
-				}}
-			>
+			<div className="nav-home">
 				<Link to="/">
-					<GoHome />
+					<GoHome size={40} />
 				</Link>
+			</div>
+			<form onSubmit={handleSubmit} className="search-form">
 				<input
 					type="text"
 					placeholder={orgName}
+					value={orgName}
 					onChange={(e) => setOrgName(e.target.value)}
 				/>
+				<button className="submit-button">
+					<GoSearch size={35} color="#878992" />
+				</button>
 			</form>
 		</section>
 	);

@@ -3,6 +3,7 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	padding-left: 0px;
 }
 
 /* Media query to kick in at minn with of 992 */
