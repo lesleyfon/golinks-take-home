@@ -16,7 +16,9 @@ function Search() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		updateOrganizationName(orgName);
+		if (orgName.length > 0) {
+			updateOrganizationName(orgName);
+		}
 	};
 	return (
 		<section className="search-container">
