@@ -8,7 +8,6 @@ import OrgReposList from "./../components/OrgRepoList/OrgReposList.js";
  */
 function OrgRepos() {
 	// Accessing the context Store
-	console.log("store.repository_url");
 	return (
 		<section className="row">
 			{" "}

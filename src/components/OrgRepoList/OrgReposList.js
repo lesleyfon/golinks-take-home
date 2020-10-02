@@ -14,7 +14,7 @@ import OrgRepoCard from "./OrgRepoCard.js";
 function OrgReposList() {
 	// Get the current Organisation name from the context store
 	const { organization_name } = useContext(AppContext);
-	console.log(organization_name);
+
 	const [repo, setRepo] = useState([]);
 
 	// UseEffect for fetching data when component mounts

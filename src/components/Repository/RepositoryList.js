@@ -21,13 +21,12 @@ function RepositoryList() {
 	useEffect(() => {
 		(async () => {
 			const repo_endpoint = repository_url || localStorage.getItem(REPO_URL_STORAGE_KEY); // Use localStorage to enable a user refresh a page
-
 			updateRepositoryUrl(repo_endpoint);
 			let data = await fetchSingleRepoData(repo_endpoint);
 
 			setRepoData(data);
 		})();
-	}, [repository_url]);
+	}, [repository_url, updateRepositoryUrl]);
 
 	return (
 		<section className="container">

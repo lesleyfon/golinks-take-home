@@ -22,7 +22,6 @@ export async function fetchOrganizationRepos(orgName) {
  * @returns Data to render on the page
  */
 export async function fetchOrgDetails(orgName) {
-	console.log(orgName);
 	try {
 		const response = await Axios.get(`https://api.github.com/orgs/${orgName}`);
 
