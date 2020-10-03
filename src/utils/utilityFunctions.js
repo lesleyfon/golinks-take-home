@@ -13,12 +13,14 @@ export async function fetchOrganizationRepos(orgName) {
 	// Pagination Implement this to fetch more than 30 repos
 	// https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#pagination
 	try {
-		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`, {
-			// headers: {
-			// 	Authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
-			// },
-		});
-
+		const response = await Axios.get(
+			`https://api.github.com/orgs/${orgName}/repos?page=1&per_page=100`,
+			{
+				// headers: {
+				// 	Authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
+				// },
+			}
+		);
 		return sortData(response.data);
 	} catch (error) {
 		console.log("Auth error", error);

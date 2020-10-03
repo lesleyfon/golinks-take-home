@@ -16,6 +16,13 @@ function OrgReposList() {
 	const { organization_name } = useContext(AppContext);
 
 	const [repo, setRepo] = useState([]);
+
+	const [allRepo, setAllRepo] = useState([]);
+
+	const [page, setPage] = useState({
+		start: 0,
+		end: 10,
+	});
 	const [err, setErr] = useState({
 		message: "",
 		isErr: false,
@@ -25,9 +32,9 @@ function OrgReposList() {
 		(async () => {
 			try {
 				let data = await fetchOrganizationRepos(organization_name);
-				setRepo(() => {
-					return data;
-				});
+
+				setRepo(data);
+				setAllRepo(data);
 				setErr({
 					message: "",
 					isErr: false,
@@ -42,10 +49,36 @@ function OrgReposList() {
 		})();
 	}, [organization_name]);
 
+	const nextPage = () => {
+		setPage({
+			start: page.end + 1,
+			end: page.end + 11,
+		});
+	};
+	const prevPage = () => {
+		if (page.start >= 11) {
+			setPage({
+				start: page.start - 11,
+				end: page.end - 10,
+			});
+		}
+	};
 	return (
 		<section className="section-container col-lg-7 col-md-12 col-sm-12">
 			{repo.length > 0 ? (
-				repo.map((repoInfo) => <OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />)
+				<>
+					<div>
+						<button onClick={prevPage} disabled={page.start <= 0 ? true : false}>
+							Previous Page
+						</button>
+						<button onClick={nextPage} disabled={page.end >= 100 ? true : false}>
+							Next Page
+						</button>
+					</div>
+					{allRepo.slice(page.start, page.end).map((repoInfo) => (
+						<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
+					))}
+				</>
 			) : (
 				<>
 					{err.isErr ? (
