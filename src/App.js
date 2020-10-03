@@ -53,8 +53,6 @@ function App() {
 			<Provider value={store}>
 				<Search />
 				<Switch>
-					<Route path="/error" component={(routeProps) => <Page404 />} />
-
 					<Route
 						path="/"
 						exact
@@ -65,6 +63,7 @@ function App() {
 						exact
 						component={(routeProps) => <Repository {...routeProps} />}
 					/>
+					<Route path="*" component={Page404} />
 				</Switch>
 			</Provider>
 		</main>

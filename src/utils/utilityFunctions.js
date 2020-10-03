@@ -18,7 +18,7 @@ export async function fetchOrganizationRepos(orgName) {
 			// 	Authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
 			// },
 		});
-		console.log("Auth Response", response);
+
 		return sortData(response.data);
 	} catch (error) {
 		console.log("Auth error", error);
@@ -115,6 +115,9 @@ async function sortData(data) {
  *
  */
 export async function fetchSingleRepoData(repoEndpoint) {
+	if (repoEndpoint === undefined) {
+		throw new Error("Can't fetch data of undefined");
+	}
 	try {
 		let { data } = await Axios.get(`https://api.github.com/repos/${repoEndpoint}`);
 
@@ -128,7 +131,7 @@ export async function fetchSingleRepoData(repoEndpoint) {
 			commit_data: commitData,
 		};
 	} catch (error) {
-		return error;
+		throw new Error(error);
 	}
 }
 
