@@ -1,4 +1,7 @@
 import Axios from "axios";
+require("dotenv").config();
+
+// console.log(process.env);
 
 /**
  *
@@ -7,16 +10,23 @@ import Axios from "axios";
  */
 
 export async function fetchOrganizationRepos(orgName) {
+	// Pagination Implement this to fetch more than 30 repos
+	// https://docs.github.com/en/free-pro-team@latest/rest/overview/resources-in-the-rest-api#pagination
 	try {
-		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`);
-
+		const response = await Axios.get(`https://api.github.com/orgs/${orgName}/repos`, {
+			// headers: {
+			// 	Authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
+			// },
+		});
+		console.log("Auth Response", response);
 		return sortData(response.data);
 	} catch (error) {
+		console.log("Auth error", error);
 		throw new Error(error);
 	}
 }
 
-/**
+/**å
  *
  * @param {*} orgName Name of the organization to fetch details
  * @returns Data to render on the page
