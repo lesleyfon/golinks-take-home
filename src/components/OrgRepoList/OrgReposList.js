@@ -50,10 +50,12 @@ function OrgReposList() {
 	}, [organization_name]);
 
 	const nextPage = () => {
-		setPage({
-			start: page.end + 1,
-			end: page.end + 11,
-		});
+		if (page.end <= allRepo.length) {
+			setPage({
+				start: page.end + 1,
+				end: page.end + 11,
+			});
+		}
 	};
 	const prevPage = () => {
 		if (page.start >= 11) {
@@ -67,17 +69,28 @@ function OrgReposList() {
 		<section className="section-container col-lg-7 col-md-12 col-sm-12">
 			{repo.length > 0 ? (
 				<>
-					<div>
-						<button onClick={prevPage} disabled={page.start <= 0 ? true : false}>
-							Previous Page
-						</button>
-						<button onClick={nextPage} disabled={page.end >= 100 ? true : false}>
-							Next Page
-						</button>
-					</div>
 					{allRepo.slice(page.start, page.end).map((repoInfo) => (
 						<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
 					))}
+					<div className="page-buttons">
+						{/* Extract this to its own component */}
+						<button
+							type="button"
+							className="btn btn-dark"
+							onClick={prevPage}
+							disabled={page.start <= 0 ? true : false}
+						>
+							Previous Page
+						</button>
+						<button
+							type="button"
+							className="btn btn-dark"
+							onClick={nextPage}
+							disabled={page.end >= allRepo.length ? true : false}
+						>
+							Next Page
+						</button>
+					</div>
 				</>
 			) : (
 				<>
