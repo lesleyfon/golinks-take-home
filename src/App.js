@@ -11,6 +11,7 @@ import Repository from "./pages/Repository.js";
 // Styles
 import "./App.css";
 import Search from "./components/Search/Search";
+import Page404 from "./pages/404/404";
 
 // App Component
 function App() {
@@ -52,6 +53,8 @@ function App() {
 			<Provider value={store}>
 				<Search />
 				<Switch>
+					<Route path="/error" component={(routeProps) => <Page404 />} />
+
 					<Route
 						path="/"
 						exact

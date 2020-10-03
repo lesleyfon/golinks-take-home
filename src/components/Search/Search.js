@@ -34,7 +34,7 @@ function Search() {
 					value={orgName}
 					onChange={(e) => setOrgName(e.target.value)}
 				/>
-				<button className="submit-button">
+				<button className="submit-button" aria-label="Submit Search">
 					<GoSearch size={35} color="#878992" />
 				</button>
 			</form>

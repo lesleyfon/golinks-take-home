@@ -1,0 +1,26 @@
+.error-section .error-details {
+	text-align: center;
+}
+.error-section .error-details h2 {
+	font-size: 5rem;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+.error-section .error-details h3 {
+	font-size: 2rem;
+	margin-bottom: 5px;
+}
+.error-section .error-details p {
+	margin-bottom: 5px;
+}
+.bg-img {
+	background-image: url("./../../assets/404bgimg2.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	width: 100vw;
+	height: 50vh;
+	padding: 0px;
+	margin: auto 0px;
+}
