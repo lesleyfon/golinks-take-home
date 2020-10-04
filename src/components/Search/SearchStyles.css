@@ -27,7 +27,8 @@
 	height: 45px;
 	display: flex;
 	align-items: center;
-	border: 0.5px solid #878992;
+	border: none;
+	background-color: #ffffff;
 }
 
 .search-container input {

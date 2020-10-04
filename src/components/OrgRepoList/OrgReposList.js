@@ -15,9 +15,7 @@ function OrgReposList() {
 	// Get the current Organisation name from the context store
 	const { organization_name } = useContext(AppContext);
 
-	const [repo, setRepo] = useState([]);
-
-	const [allRepo, setAllRepo] = useState([]);
+	const [allRepo, setAllRepositories] = useState([]);
 
 	const [page, setPage] = useState({
 		start: 0,
@@ -33,8 +31,7 @@ function OrgReposList() {
 			try {
 				let data = await fetchOrganizationRepos(organization_name);
 
-				setRepo(data);
-				setAllRepo(data);
+				setAllRepositories(data);
 				setErr({
 					message: "",
 					isErr: false,
@@ -67,7 +64,7 @@ function OrgReposList() {
 	};
 	return (
 		<section className="section-container col-lg-7 col-md-12 col-sm-12">
-			{repo.length > 0 ? (
+			{allRepo.length > 0 ? (
 				<>
 					{allRepo.slice(page.start, page.end).map((repoInfo) => (
 						<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
