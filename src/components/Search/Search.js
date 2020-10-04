@@ -13,12 +13,11 @@ function Search({ history }) {
 	const { updateOrganizationName } = useContext(AppContext);
 
 	const [orgName, setOrgName] = useState("Netflix");
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
 		if (orgName.length > 0) {
-			updateOrganizationName(orgName);
+			updateOrganizationName(orgName.trim());
 			// Redirect to the home page if we happen to search something and we are not on the home page
 			history.push("/");
 		}
@@ -32,8 +31,9 @@ function Search({ history }) {
 			</div>
 			<form onSubmit={handleSubmit} className="search-form">
 				<input
+					autoFocus
 					type="text"
-					placeholder={orgName}
+					placeholder={orgName || "Organization Name"}
 					value={orgName}
 					onChange={(e) => setOrgName(e.target.value)}
 				/>
