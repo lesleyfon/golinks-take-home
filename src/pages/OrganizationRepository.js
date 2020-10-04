@@ -12,8 +12,10 @@ function OrganizationRepository() {
 			{" "}
 			{/* Displays basic information about an organization repository */}
 			<Header />
-			{/* Displays cards of all repository in an organization   */}
-			<OrgReposList />
+			<section className="section-container col-lg-7 col-md-12 col-sm-12">
+				{/* Displays cards of all repository in an organization   */}
+				<OrgReposList />
+			</section>
 		</section>
 	);
 }

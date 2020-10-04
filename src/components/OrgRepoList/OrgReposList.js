@@ -11,6 +11,7 @@ import { fetchOrganizationRepos } from "../../utils/utilityFunctions";
 // Styles
 import "./OrgListStyles.css";
 import NextPrevButtons from "./NextPrevButtons.js";
+import { Spinner } from "react-bootstrap";
 
 /**
  * @description Displays cards of all repository in an organization
@@ -20,6 +21,7 @@ function OrganizationRepositoryList() {
 	// Get the current Organization name from the context store
 	const { organization_name } = useContext(AppContext);
 
+	const [isFetching, setIsFetching] = useState(false);
 	const [allRepositories, setAllRepositories] = useState([]);
 
 	// Used to keep track of the current repositories being rendered
@@ -39,9 +41,11 @@ function OrganizationRepositoryList() {
 		// IIFE to run when the component mounts
 		(async () => {
 			try {
+				setIsFetching(true);
 				let data = await fetchOrganizationRepos(organization_name);
 
 				setAllRepositories(data);
+				setIsFetching(false);
 				setErr({
 					message: "",
 					isErr: false,
@@ -51,6 +55,7 @@ function OrganizationRepositoryList() {
 					message: err.message,
 					isErr: true,
 				});
+				setIsFetching(false);
 				console.log(err);
 			}
 		})();
@@ -76,39 +81,57 @@ function OrganizationRepositoryList() {
 			});
 		}
 	};
-	return (
-		<section className="section-container col-lg-7 col-md-12 col-sm-12">
-			{allRepositories.length > 0 ? (
-				<>
-					{allRepositories.slice(page.start, page.end).map((repoInfo) => (
-						<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
-					))}
 
-					<NextPrevButtons
-						prevPage={prevPage}
-						nextPage={nextPage}
-						page={page}
-						allRepositories={allRepositories}
-					/>
-				</>
-			) : (
-				<>
-					{err.isErr ? (
-						<h3
-							// Move styles for the CSS file
-							style={{
-								textAlign: "left",
-							}}
-						>
-							Error: Double Check the organization name if it is spelled right
-						</h3>
-					) : (
-						<h1>No Repositories in this Organization</h1>
-					)}
-				</>
-			)}
-		</section>
-	);
+	if (allRepositories.length > 0) {
+		console.log("Here");
+		return (
+			<>
+				{allRepositories.slice(page.start, page.end).map((repoInfo) => (
+					<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
+				))}
+
+				<NextPrevButtons
+					prevPage={prevPage}
+					nextPage={nextPage}
+					page={page}
+					allRepositories={allRepositories}
+				/>
+			</>
+		);
+	} else if (err.isErr) {
+		return (
+			<h3
+				// Move styles for the CSS file
+				style={{
+					textAlign: "left",
+				}}
+			>
+				Error: Double Check the organization name if it is spelled right
+			</h3>
+		);
+	} else if (isFetching) {
+		return (
+			<>
+				<Spinner
+					animation="grow"
+					style={{
+						display: "inline-block",
+						width: "30rem",
+						height: "30rem",
+						verticalAlign: "text-bottom",
+						backgroundColor: "currentColor",
+						borderRadius: "50%",
+						opacity: "0",
+						animation: "spinner-grow 1s linear infinite",
+					}}
+					variant="dark"
+					role="loading spinner"
+				/>
+			</>
+		);
+	} else {
+		return <h1>No Repositories in this Organization</h1>;
+	}
 }
 
 export default OrganizationRepositoryList;

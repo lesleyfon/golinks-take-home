@@ -64,3 +64,14 @@
 .page-buttons button:disabled {
 	cursor: not-allowed;
 }
+
+.spinner-grow {
+	display: inline-block;
+	width: 25rem;
+	height: 25rem;
+	vertical-align: text-bottom;
+	background-color: currentColor;
+	border-radius: 50%;
+	opacity: 0;
+	animation: spinner-grow 1s linear infinite;
+}
