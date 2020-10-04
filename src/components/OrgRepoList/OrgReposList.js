@@ -11,7 +11,7 @@ import { fetchOrganizationRepos } from "../../utils/utilityFunctions";
 // Styles
 import "./OrgListStyles.css";
 import NextPrevButtons from "./NextPrevButtons.js";
-import { Spinner } from "react-bootstrap";
+import Spinner from "./../Spinner/Spinner.js";
 
 /**
  * @description Displays cards of all repository in an organization
@@ -83,7 +83,6 @@ function OrganizationRepositoryList() {
 	};
 
 	if (allRepositories.length > 0) {
-		console.log("Here");
 		return (
 			<>
 				{allRepositories.slice(page.start, page.end).map((repoInfo) => (
@@ -99,36 +98,16 @@ function OrganizationRepositoryList() {
 			</>
 		);
 	} else if (err.isErr) {
+		//
+
 		return (
-			<h3
-				// Move styles for the CSS file
-				style={{
-					textAlign: "left",
-				}}
-			>
+			<h3 className="error-h3">
 				Error: Double Check the organization name if it is spelled right
 			</h3>
 		);
 	} else if (isFetching) {
-		return (
-			<>
-				<Spinner
-					animation="grow"
-					style={{
-						display: "inline-block",
-						width: "30rem",
-						height: "30rem",
-						verticalAlign: "text-bottom",
-						backgroundColor: "currentColor",
-						borderRadius: "50%",
-						opacity: "0",
-						animation: "spinner-grow 1s linear infinite",
-					}}
-					variant="dark"
-					role="loading spinner"
-				/>
-			</>
-		);
+		// Loading Spinner
+		return <Spinner />;
 	} else {
 		return <h1>No Repositories in this Organization</h1>;
 	}
