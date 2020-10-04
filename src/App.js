@@ -44,7 +44,6 @@ function App() {
 		error: error,
 		updateRepositoryUrl,
 		updateErrorState,
-
 		updateOrganizationName,
 	};
 

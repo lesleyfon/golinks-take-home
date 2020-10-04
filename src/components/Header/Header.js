@@ -31,7 +31,6 @@ function Header() {
 		(async () => {
 			try {
 				const data = await fetchOrgDetails(organization_name);
-
 				setErr({
 					message: "",
 					isErr: false,

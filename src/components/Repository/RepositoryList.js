@@ -12,6 +12,7 @@ import "./RepositoryStyles.css";
 import RepositoryHeader from "./RepositoryHeader.js";
 import { withRouter } from "react-router-dom";
 import Page404 from "../../pages/404/404.js";
+import Spinner from "../Spinner/Spinner.js";
 
 /**
  * JSDoc
@@ -71,7 +72,12 @@ function RepositoryList({ history, location }) {
 	}, [repository_url, updateRepositoryUrl, history, location.pathname, organization_name]);
 
 	return (
-		<section className="container">
+		<section
+			className="container"
+			style={{
+				backgroundColor: "#ecf2fd",
+			}}
+		>
 			{repoData.repo_name ? (
 				<>
 					<RepositoryHeader repoData={repoData} />
@@ -83,7 +89,7 @@ function RepositoryList({ history, location }) {
 					</section>
 				</>
 			) : (
-				<>{error ? <Page404 /> : <h2>Loading...</h2>}</>
+				<>{error ? <Page404 /> : <Spinner />}</>
 			)}
 		</section>
 	);
