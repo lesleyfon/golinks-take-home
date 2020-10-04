@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppContext from "./../../context/AppContext";
 
 // Icons
@@ -9,15 +9,18 @@ import { GoHome, GoSearch } from "react-icons/go";
 // Styles
 import "./SearchStyles.css";
 
-function Search() {
+function Search({ history }) {
 	const { updateOrganizationName } = useContext(AppContext);
 
 	const [orgName, setOrgName] = useState("Netflix");
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
 		if (orgName.length > 0) {
 			updateOrganizationName(orgName);
+			// Redirect to the home page if we happen to search something and we are not on the home page
+			history.push("/");
 		}
 	};
 	return (
@@ -42,4 +45,4 @@ function Search() {
 	);
 }
 
-export default Search;
+export default withRouter(Search);

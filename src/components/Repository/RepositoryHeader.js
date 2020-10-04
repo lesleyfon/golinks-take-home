@@ -6,7 +6,9 @@ import { FiStar } from "react-icons/fi";
 
 /**
  *
- * @param {*} param0 Props
+ * @param {object} repositoryData details about a repository
+ * @description Displays information about the current repository being rendered
+ * @returns JSX
  */
 function RepositoryHeader({ repoData }) {
 	return (

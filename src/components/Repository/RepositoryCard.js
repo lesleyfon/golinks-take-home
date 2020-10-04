@@ -3,20 +3,22 @@ import React from "react";
 import { parseDate } from "./../../utils/utilityFunctions.js";
 
 /**
- * 
- * @param {*} repoData Props passed data down  
-
+ *
+ * @param {object} commit_data commit data about a repository
+ * @returns JSX
  */
 function RepositoryCard({ commit_data }) {
 	const hash = {
 		shortenHash: commit_data.sha.substring(0, 8),
 		fullHash: commit_data.sha,
 	};
-	let url = null;
+	let avatar_url = null;
 
 	if (commit_data.committer) {
-		url = commit_data.committer.avatar_url;
+		// Avatar url
+		avatar_url = commit_data.committer.avatar_url;
 	}
+
 	return (
 		<>
 			<div className="commit-card">
@@ -25,7 +27,10 @@ function RepositoryCard({ commit_data }) {
 					<div className="commit-card-bottom">
 						<div className="committer-avatar">
 							<img
-								src={url || "https://avatars3.githubusercontent.com/u/19864447?v=4"}
+								src={
+									avatar_url ||
+									"https://avatars3.githubusercontent.com/u/19864447?v=4"
+								}
 								alt="committer avatar"
 							/>
 						</div>

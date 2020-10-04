@@ -14,13 +14,20 @@ import { withRouter } from "react-router-dom";
 import Page404 from "../../pages/404/404.js";
 
 /**
- * Display a single repository with info about that repository
+ * JSDoc
+ * @param {object} history Provides different implementation of managing session history
+ * @param {object} location Represents where the app is now
+ * @description Display a single repository with info about that repository
+ * @returns JSX
  */
 function RepositoryList({ history, location }) {
+	// current data from the context store
 	const { repository_url, updateRepositoryUrl, organization_name } = useContext(AppContext);
-	const [error, setError] = useState(false); // Use this state to determine when to render the erro page
 
-	const [repoData, setRepoData] = useState({});
+	const [error, setError] = useState(false); // Use this state to determine when to render the error page
+
+	const [repoData, setRepoData] = useState({}); // State for holding basic details about a repository
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -28,8 +35,8 @@ function RepositoryList({ history, location }) {
 					!!repository_url === false &&
 					!!localStorage.getItem(REPO_URL_STORAGE_KEY) === false
 				) {
-					// Redirect to the error page if we don't have anything save to the local storage and we are trying to access commits from repo
-					setError(false);
+					// Redirect to the error page if we don't have anything save to the local storage and we are trying to access commits from an empty string or a falsy value
+					setError(true);
 					history.push("/error");
 				}
 
@@ -42,7 +49,7 @@ function RepositoryList({ history, location }) {
 					return;
 				} else {
 					/**
-					 * -  If all the above cases do not fall true, we get the path name fand try to fetch data for it.
+					 * -  If all the above cases do not fall true, we get the path name and try to fetch data for it.
 					 * -  If we have an error, that means the repo doesn't exist and we want to render the error page
 					 * - If the path name was able to return data we render commits for that repo
 					 

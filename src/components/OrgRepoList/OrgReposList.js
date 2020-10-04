@@ -1,5 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 
+import OrgRepoCard from "./OrgRepoCard.js";
+
 // Context
 import AppContext from "../../context/AppContext.js";
 
@@ -8,25 +10,33 @@ import { fetchOrganizationRepos } from "../../utils/utilityFunctions";
 
 // Styles
 import "./OrgListStyles.css";
+import NextPrevButtons from "./NextPrevButtons.js";
 
-import OrgRepoCard from "./OrgRepoCard.js";
-
-function OrgReposList() {
-	// Get the current Organisation name from the context store
+/**
+ * @description Displays cards of all repository in an organization
+ * @returns JSX
+ */
+function OrganizationRepositoryList() {
+	// Get the current Organization name from the context store
 	const { organization_name } = useContext(AppContext);
 
-	const [allRepo, setAllRepositories] = useState([]);
+	const [allRepositories, setAllRepositories] = useState([]);
 
+	// Used to keep track of the current repositories being rendered
 	const [page, setPage] = useState({
 		start: 0,
 		end: 10,
 	});
+
+	// Error state
 	const [err, setErr] = useState({
 		message: "",
 		isErr: false,
 	});
+
 	// UseEffect for fetching data when component mounts
 	useEffect(() => {
+		// IIFE to run when the component mounts
 		(async () => {
 			try {
 				let data = await fetchOrganizationRepos(organization_name);
@@ -46,16 +56,20 @@ function OrgReposList() {
 		})();
 	}, [organization_name]);
 
+	// Function to move to the next next 10 repositories in an organization stored in the allRepository state
 	const nextPage = () => {
-		if (page.end <= allRepo.length) {
+		if (page.end <= allRepositories.length) {
+			// only go forward when end is less than the length of the allRepositories state
 			setPage({
 				start: page.end + 1,
 				end: page.end + 11,
 			});
 		}
 	};
+	// Function to move to the prev 10 repositories in an organization stored in the allRepository state
 	const prevPage = () => {
 		if (page.start >= 11) {
+			// only go back when start is greater than 10
 			setPage({
 				start: page.start - 11,
 				end: page.end - 10,
@@ -64,35 +78,24 @@ function OrgReposList() {
 	};
 	return (
 		<section className="section-container col-lg-7 col-md-12 col-sm-12">
-			{allRepo.length > 0 ? (
+			{allRepositories.length > 0 ? (
 				<>
-					{allRepo.slice(page.start, page.end).map((repoInfo) => (
+					{allRepositories.slice(page.start, page.end).map((repoInfo) => (
 						<OrgRepoCard key={repoInfo.id} repoInfo={repoInfo} />
 					))}
-					<div className="page-buttons">
-						{/* Extract this to its own component */}
-						<button
-							type="button"
-							className="btn btn-dark"
-							onClick={prevPage}
-							disabled={page.start <= 0 ? true : false}
-						>
-							Previous Page
-						</button>
-						<button
-							type="button"
-							className="btn btn-dark"
-							onClick={nextPage}
-							disabled={page.end >= allRepo.length ? true : false}
-						>
-							Next Page
-						</button>
-					</div>
+
+					<NextPrevButtons
+						prevPage={prevPage}
+						nextPage={nextPage}
+						page={page}
+						allRepositories={allRepositories}
+					/>
 				</>
 			) : (
 				<>
 					{err.isErr ? (
 						<h3
+							// Move styles for the CSS file
 							style={{
 								textAlign: "left",
 							}}
@@ -108,4 +111,4 @@ function OrgReposList() {
 	);
 }
 
-export default OrgReposList;
+export default OrganizationRepositoryList;

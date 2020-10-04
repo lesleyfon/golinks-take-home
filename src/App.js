@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Provider } from "./context/AppContext";
 
 // Pages
-import OrgRepos from "./pages/OrgRepos.js";
+import OrganizationRepository from "./pages/OrganizationRepository.js";
 import Repository from "./pages/Repository.js";
 
 // Styles
@@ -53,16 +53,21 @@ function App() {
 			<Provider value={store}>
 				<Search />
 				<Switch>
+					{/** Renders all the repositories of an organization */}
 					<Route
 						path="/"
 						exact
-						component={(routeProps) => <OrgRepos {...routeProps} />}
+						component={(routeProps) => <OrganizationRepository {...routeProps} />}
 					/>
+
+					{/** Renders commits of a single repositories */}
 					<Route
 						path="/repo/:reponame"
 						exact
 						component={(routeProps) => <Repository {...routeProps} />}
 					/>
+
+					{/* Error page */}
 					<Route path="*" component={Page404} />
 				</Switch>
 			</Provider>

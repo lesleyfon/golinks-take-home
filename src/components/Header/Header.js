@@ -12,6 +12,10 @@ import { FaTwitter } from "react-icons/fa";
 
 import "./HeaderStyle.css";
 
+/**
+ * @description Renders details about the current organization repository
+ * @returns JXS
+ */
 function Header() {
 	const { organization_name } = useContext(AppContext);
 
@@ -20,7 +24,10 @@ function Header() {
 		message: "",
 		isErr: false,
 	});
+
 	useEffect(() => {
+		// IIFE to run when the component mounts
+
 		(async () => {
 			try {
 				const data = await fetchOrgDetails(organization_name);
@@ -38,6 +45,7 @@ function Header() {
 			}
 		})();
 	}, [organization_name]);
+
 	return (
 		<header className="org-header col-lg-4 col-md-12 col-sm-12">
 			{orgDetails.fetchComplete ? (
@@ -57,7 +65,13 @@ function Header() {
 						<div>
 							{orgDetails.twitter ? (
 								<span>
-									<FaTwitter /> {orgDetails.twitter}
+									<a
+										href={`https://www.twitter.com/${orgDetails.twitter}`}
+										rel="noopener noreferrer" // Prevents passing referrer information to the target website by removing the referral info from the HTTP header.
+										target="_blank"
+									>
+										<FaTwitter /> {orgDetails.twitter}
+									</a>
 								</span>
 							) : null}
 						</div>
