@@ -20,8 +20,8 @@ function OrgRepoCard({ repoInfo }) {
 	const handleClick = () => {
 		// Update context store repository_url
 		let end_point = repoInfo.repo_url.split("/");
-
 		end_point = `${end_point[end_point.length - 2]}/${end_point[end_point.length - 1]}`;
+		console.log(end_point);
 		updateRepositoryUrl(end_point);
 
 		// Incase user refreshes a page we want to be able to persist the repo_url_endpoint

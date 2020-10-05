@@ -12,13 +12,18 @@ import Repository from "./pages/Repository.js";
 import "./App.css";
 import Search from "./components/Search/Search";
 import Page404 from "./pages/404/404";
+import { ORGANIZATION_NAME_STORAGE_KEY } from "./utils/CONSTANTS";
 
 // App Component
 function App() {
 	// Local State
 
 	const [repository_url, setRepoUrl] = useState("");
-	const [organizationName, setOrganizationName] = useState("Netflix");
+
+	// Retrieve the company name saved in local storage. This help persist company names so we are able to refresh and get the same organization repo
+	const [organizationName, setOrganizationName] = useState(
+		localStorage.getItem(ORGANIZATION_NAME_STORAGE_KEY) || "Netflix"
+	);
 
 	const [error, setError] = useState({
 		message: "",

@@ -12,6 +12,7 @@ import { fetchOrganizationRepos } from "../../utils/utilityFunctions";
 import "./OrgListStyles.css";
 import NextPrevButtons from "./NextPrevButtons.js";
 import Spinner from "./../Spinner/Spinner.js";
+import { ORGANIZATION_NAME_STORAGE_KEY } from "../../utils/CONSTANTS.js";
 
 /**
  * @description Displays cards of all repository in an organization
@@ -42,7 +43,9 @@ function OrganizationRepositoryList() {
 		(async () => {
 			try {
 				setIsFetching(true);
+
 				let data = await fetchOrganizationRepos(organization_name);
+				localStorage.setItem(ORGANIZATION_NAME_STORAGE_KEY, organization_name);
 
 				setAllRepositories(data);
 				setIsFetching(false);

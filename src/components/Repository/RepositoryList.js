@@ -43,7 +43,6 @@ function RepositoryList({ history, location }) {
 
 				if (!!repository_url) {
 					// If the repository url is update. This means someone clicked a repo card and is trying to access commits from this repo, then we want to fetch commit data for that repository
-
 					setError(false);
 					let data = await fetchSingleRepoData(repository_url);
 					setRepoData(data);
@@ -53,14 +52,13 @@ function RepositoryList({ history, location }) {
 					 * -  If all the above cases do not fall true, we get the path name and try to fetch data for it.
 					 * -  If we have an error, that means the repo doesn't exist and we want to render the error page
 					 * - If the path name was able to return data we render commits for that repo
-					 
 					 * */
 
 					setError(false);
 					let pathName = location.pathname;
 					pathName = pathName.split("/");
 					pathName = pathName[pathName.length - 1];
-
+					console.log(repository_url, organization_name);
 					let data = await fetchSingleRepoData(`${organization_name}/${pathName}`);
 					setRepoData(data);
 				}
