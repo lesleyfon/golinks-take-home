@@ -1,7 +1,11 @@
 import Axios from "axios";
-require("dotenv").config();
+import { REACT_APP_AUTH_TOKEN } from "./CONSTANTS";
 
-// console.log(process.env);
+const configHeader = {
+	headers: {
+		Authorization: `token ${REACT_APP_AUTH_TOKEN}`,
+	},
+};
 
 /**
  *
@@ -15,11 +19,7 @@ export async function fetchOrganizationRepos(orgName) {
 	try {
 		const response = await Axios.get(
 			`https://api.github.com/orgs/${orgName}/repos?page=1&per_page=100`,
-			{
-				// headers: {
-				// 	Authorization: `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
-				// },
-			}
+			configHeader
 		);
 		return sortData(response.data);
 	} catch (error) {
@@ -35,7 +35,7 @@ export async function fetchOrganizationRepos(orgName) {
  */
 export async function fetchOrgDetails(orgName) {
 	try {
-		const response = await Axios.get(`https://api.github.com/orgs/${orgName}`);
+		const response = await Axios.get(`https://api.github.com/orgs/${orgName}`, configHeader);
 
 		return {
 			avatar_url: response.data.avatar_url,
@@ -62,21 +62,21 @@ export function parseDate(dateString) {
 }
 
 /**
- *
- * @param {*} languageUrl api endpoint for fetching all languages used in a repository
- * @returns An object of all the languages used in the repo
- async function fetchLanguages(languageUrl) {
-	 try {
-		 const response = await Axios.get(`${languageUrl}`, {
-			 auth: {
-			 },
-		 });
-		 return response;
-	 } catch (error) {
-		 return error;
-	 }
- }
- */
+	 *
+	 * @param {*} languageUrl api endpoint for fetching all languages used in a repository
+	 * @returns An object of all the languages used in the repo
+	 async function fetchLanguages(languageUrl) {
+		 try {
+			 const response = await Axios.get(`${languageUrl}`, {
+				 auth: {
+				},
+			});
+			return response;
+		} catch (error) {
+			return error;
+		}
+	}
+	*/
 
 /**
  *
@@ -121,7 +121,10 @@ export async function fetchSingleRepoData(repoEndpoint) {
 		throw new Error("Can't fetch data of undefined");
 	}
 	try {
-		let { data } = await Axios.get(`https://api.github.com/repos/${repoEndpoint}`);
+		let { data } = await Axios.get(
+			`https://api.github.com/repos/${repoEndpoint}`,
+			configHeader
+		);
 
 		let commitUrl = data.commits_url.split("{")[0];
 		let commitData = await fetchCommitData(commitUrl);
@@ -139,7 +142,7 @@ export async function fetchSingleRepoData(repoEndpoint) {
 
 async function fetchCommitData(commitUrl) {
 	try {
-		const { data } = await Axios.get(commitUrl);
+		const { data } = await Axios.get(commitUrl, configHeader);
 		return data;
 	} catch (error) {
 		return error;
