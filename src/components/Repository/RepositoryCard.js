@@ -4,7 +4,7 @@ import { parseDate } from "./../../utils/utilityFunctions.js";
 
 /**
  *
- * @param {object} commit_data commit data about a repository
+ * @param {object} commit_data commit data about a single repository
  * @returns JSX
  */
 function RepositoryCard({ commit_data }) {
