@@ -1,9 +1,10 @@
 import Axios from "axios";
 import { REACT_APP_AUTH_TOKEN } from "./CONSTANTS";
 
+const token = REACT_APP_AUTH_TOKEN ? `token ${REACT_APP_AUTH_TOKEN}` : "";
 const configHeader = {
 	headers: {
-		Authorization: `token ${REACT_APP_AUTH_TOKEN}`,
+		Authorization: token,
 	},
 };
 
@@ -142,7 +143,7 @@ export async function fetchSingleRepoData(repoEndpoint) {
 
 async function fetchCommitData(commitUrl) {
 	try {
-		const { data } = await Axios.get(commitUrl, configHeader);
+		const { data } = await Axios.get(commitUrl + "?page=1&per_page=100", configHeader);
 		return data;
 	} catch (error) {
 		return error;
