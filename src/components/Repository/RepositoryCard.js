@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { parseDate } from "./../../utils/utilityFunctions.js";
 
@@ -12,6 +12,7 @@ function RepositoryCard({ commit_data }) {
 		shortenHash: commit_data.sha.substring(0, 8),
 		fullHash: commit_data.sha,
 	};
+	const [isFull, setIsFull] = useState(false);
 	let avatar_url = null;
 
 	if (commit_data.committer) {
@@ -40,7 +41,23 @@ function RepositoryCard({ commit_data }) {
 				</div>
 
 				<div className="right col-md-2 col-sm-12">
-					<p>Hash: {hash.shortenHash}</p>
+					{/* <p>Hash: {hash.shortenHash}</p> */}
+					{isFull ? (
+						<p>
+							{hash.fullHash}{" "}
+							<span className="more-less" onClick={() => setIsFull(!isFull)}>
+								less
+							</span>
+						</p>
+					) : (
+						<p>
+							{hash.shortenHash}
+							<span className="more-less" onClick={() => setIsFull(!isFull)}>
+								{" "}
+								more
+							</span>
+						</p>
+					)}
 				</div>
 			</div>
 		</>

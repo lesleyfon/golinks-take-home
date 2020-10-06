@@ -85,3 +85,14 @@
 	width: 100%;
 	border-radius: 50%;
 }
+
+.right p .more-less {
+	font-size: 0.55rem;
+	color: #444d56;
+	border: 1px solid rgb(135, 137, 146);
+	border-radius: 5px;
+	padding: 2px;
+	height: 2px;
+	margin-left: 5px;
+	cursor: pointer;
+}
