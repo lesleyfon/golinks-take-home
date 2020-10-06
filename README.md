@@ -6,7 +6,7 @@ This is a Frontend React web application that allows users to search for organiz
 
 ## Getting Started :
 
-[The application is deployed on Netlify here](#)
+[The application is deployed on Netlify here](https://golinks-take-home.netlify.app/)
 
 You can open up the deployed link and explore the website. Enter a valid GitHub organization to search their repositories and explore their latest commits for every repository/
 
@@ -30,6 +30,10 @@ yarn install
 
 After the installation process is done, you can run one of the commands below, depending on which package manager you decided to use to install all the dependencies
 
+### Note:
+
+The current max request that can be made to GitHub API is 60. To increase the capacity of the request to be made to the GitHub API to 5000, you need to be authorized. And to so, you need an [Authorization token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). After creating on, all you need to do then is to create a `.env` file in the root directory of the app and add an environmental variable with the name `REACT_APP_AUTH_TOKEN` and assign your token to it.
+
 ```
 yarn start
 ```
@@ -40,7 +44,7 @@ or
 npm start
 ```
 
-To intialize the app. It will launch the application at `http://localhost:3000` and you are now ready to see organization repositories as well as latest commits for that repository
+To initialize the app. It will launch the application at `http://localhost:3000` and you are now ready to see organization repositories as well as latest commits for that repository
 
 ## Built With :
 
